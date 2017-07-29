@@ -8,10 +8,10 @@ import com.product.dto.Product;
 
 public class ProductWSImpl implements ProductWS {
 	
-	private ProductDAO productDAO;
+	private ProductDAO productdao;
 
 	@Override
-	public Response add(Product productDto) {
+	public Response add(Product productDto, ProductDAO productDAO) {
 		
 		com.product.entity.Product productEntity = new com.product.entity.Product();
 		
@@ -20,7 +20,7 @@ public class ProductWSImpl implements ProductWS {
 		productEntity.setDescription(productDto.getDescription());
 		productEntity.setPrice(productDto.getPrice());
 		
-		productDAO.create(productEntity);
+		productdao.create(productEntity);
 		
 		return Response.ok().build();
 	}
@@ -28,7 +28,7 @@ public class ProductWSImpl implements ProductWS {
 	@Override
 	public Response update(Product productDto) {
 		
-		productDAO.update(productDto.getId(), productDto.getPrice());
+		productdao.update(productDto.getId(), productDto.getPrice());
 		
 		return Response.ok().build();
 	}
@@ -36,7 +36,7 @@ public class ProductWSImpl implements ProductWS {
 	@Override
 	public Response delete(int id) {
 		
-		productDAO.delete(id);
+		productdao.delete(id);
 		
 		return Response.ok().build();
 	}
@@ -44,7 +44,7 @@ public class ProductWSImpl implements ProductWS {
 	@Override
 	public Product find(int id) {
 		
-		com.product.entity.Product productEntity = productDAO.find(id);
+		com.product.entity.Product productEntity = productdao.find(id);
 		
 		Product productDto = new Product();
 		
@@ -58,6 +58,14 @@ public class ProductWSImpl implements ProductWS {
 		return productDto;
 		
 		
+	}
+
+	public ProductDAO getProductdao() {
+		return productdao;
+	}
+
+	public void setProductdao(ProductDAO productdao) {
+		this.productdao = productdao;
 	}
 
 }

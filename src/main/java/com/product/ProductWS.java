@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import com.product.dao.ProductDAO;
 import com.product.dto.Product;
 
 @Produces({ "application/xml", "application/json" })
@@ -29,5 +30,7 @@ public interface ProductWS {
 	@GET
 	@Path("/products/{id}")
 	Product find(@PathParam("id") int id);
+
+	Response add(Product productDto, ProductDAO productDAO);
 
 }
